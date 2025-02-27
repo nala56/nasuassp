@@ -1,0 +1,89 @@
+//******************************************************************************************
+// #Version 1.3#
+//
+// 		Changes: - ObjectPath will be removed if vehicle has one.
+//
+//******************************************************************************************
+
+const char DUMMY_PATROL[] 			= "DummyPatrol";
+const char OBJ_SAMUMED[]				= "mod:Prototypes/Persons/Ambulance/SAMU_MED.e4p";
+const char OBJ_SEC[]					= "mod:Prototypes/Persons/Ambulance/PC_MED.e4p";
+const char OBJ_MED[]					= "mod:Prototypes/Persons/Fire Department/SP_MED.e4p";
+
+object EmptyCar : CommandScript
+{
+
+	EmptyCar()
+	{
+		SetValidTargets(ACTOR_VEHICLE);
+		SetDoubleClickable(true);
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetPriority(150);
+	}
+
+	bool CheckPossible(GameObject *Caller)
+	{
+		if (!Caller->IsValid() || Caller->GetType() != ACTOR_VEHICLE)
+			return false;
+		Vehicle v(Caller);
+		if(v.HasCommand("FlyTo") && !v.IsOnGround())
+			return false;
+		return v.GetNumPassengers() > 0;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		if(!Caller->IsValid() || !Target->IsValid())
+			return false;
+		
+		if(Caller->GetType()==ACTOR_VEHICLE && Target->GetType()==ACTOR_VEHICLE && Caller->GetID()==Target->GetID())
+		{
+			Vehicle v(Caller);
+			if (!v.IsValid() ||  v.IsDestroyed())
+			        return false;
+			if(v.HasCommand("FlyTo") && !v.IsOnGround())
+				return false;		
+			if(v.GetNumPassengers() > 0)
+				return true;
+		}
+				
+		return false;
+	}
+
+	
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+		if(v.HasObjectPath(NULL))
+			Game::ExecuteCommand(DUMMY_PATROL, &v, &v);
+		if (!v.IsCurrentAction("EActionCool") && !v.IsCurrentAction("EActionExtinguish"))
+			v.PushActionWait(ACTION_NEWLIST, 0.05f);
+		if (v.HasCommand("DummyFollow"))
+			v.RemoveCommand("DummyFollow");
+	
+		PersonList l = v.GetPassengers();
+		for(int i=0; i<l.GetNumPersons(); i++) {
+			if (!l.GetPerson(i)->HasAnimation("bark"))
+				l.GetPerson(i)->PushActionLeaveCar(ACTION_NEWLIST, Target);
+			
+			//Ajout du sac de secours pour le corps medical
+			if (Game::IsCampaign() || Game::IsMission()) {
+				Person p(l.GetPerson(i));
+				if ((StrCompare(p.GetPrototypeFileName(), OBJ_MED) == 0) || 
+				(StrCompare(p.GetPrototypeFileName(), OBJ_SEC) == 0) || 
+				(StrCompare(p.GetPrototypeFileName(), OBJ_SAMUMED) == 0))
+					p.SetEquipment(EQUIP_EMERGENCY_CASE);
+			}
+		}
+		
+		//Rescue Heli; faire descendre les passagers sauves quand atteri
+		if (v.GetVehicleType() == VT_THW_FGRT_BH)
+		{
+			PersonList l2 = v.GetTransports();
+			for(int i=0; i<l2.GetNumPersons(); i++)
+				if (!l2.GetPerson(i)->HasAnimation("bark"))
+					l2.GetPerson(i)->PushActionLeaveCar(ACTION_NEWLIST, Target);
+		}
+	}	
+};

@@ -1,0 +1,77 @@
+int DummyGroup = 24;
+const char PROTO_307_BAC[]		= "mod:Prototypes/Vehicles/Police/307_bac.e4p";
+const char PROTO_308_BAC[]		= "mod:Prototypes/Vehicles/Police/308_bac.e4p";
+const char PROTO_GOLF_BAC[]		= "mod:Prototypes/Vehicles/Police/golf_bac.e4p";
+const char PROTO_C4_BAC[]		= "mod:Prototypes/Vehicles/Police/c4_bana.e4p";
+const char PROTO_C8_RAID[]		= "mod:Prototypes/Vehicles/Police/c8_raid.e4p";
+
+object VcmdFlashingLights : CommandScript
+{
+	VcmdFlashingLights()
+	{
+		SetIcon("flashinglight");
+		SetCursor("flashinglight");
+ 		SetGroupID(DummyGroup);
+ 		SetGroupLeader(true);
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+	}
+
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+ 		if (!Caller->IsValid())
+ 			return false;
+
+		Vehicle v(Caller);
+		if (v.IsBlueLightEnabled())
+			SetIcon("flashinglight");
+		else
+			SetIcon("flashinglight");
+ 
+ 		if (Caller->GetType() == ACTOR_VEHICLE)
+ 		{
+ 			return true;
+ 		}
+ 
+ 		return false;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+ 		if (!Caller->IsValid() || !Target->IsValid() || Target->GetID() != Caller->GetID())
+ 			return false;
+ 
+ 		if (Caller->GetType() == ACTOR_VEHICLE)
+ 		{
+ 			return true;
+ 		}
+ 
+ 		return true;
+ 	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+		if (v.IsBlueLightEnabled())
+		{
+			v.EnableBlueLights(false);
+			//Gyros Bac Disparition
+			if (StrCompare(v.GetPrototypeFileName(), PROTO_307_BAC) == 0 || 
+			StrCompare(v.GetPrototypeFileName(), PROTO_308_BAC) == 0 || 
+			StrCompare(v.GetPrototypeFileName(), PROTO_GOLF_BAC) == 0 || 
+			StrCompare(v.GetPrototypeFileName(), PROTO_C4_BAC) == 0 || 
+			StrCompare(v.GetPrototypeFileName(), PROTO_C8_RAID) == 0)			
+				v.PlayAnimCloseDoor(DAT_SPECIAL, 4.f, Caller);
+		}
+		else
+		{
+			v.EnableBlueLights(true);
+			//Gyros Bac Apparition
+			if (StrCompare(v.GetPrototypeFileName(), PROTO_307_BAC) == 0 || 
+			StrCompare(v.GetPrototypeFileName(), PROTO_308_BAC) == 0 || 
+			StrCompare(v.GetPrototypeFileName(), PROTO_GOLF_BAC) == 0 || 
+			StrCompare(v.GetPrototypeFileName(), PROTO_C4_BAC) == 0 || 
+			StrCompare(v.GetPrototypeFileName(), PROTO_C8_RAID) == 0)
+				v.PlayAnimOpenDoor(DAT_SPECIAL, 4.f, Caller);
+		}	
+	}
+};

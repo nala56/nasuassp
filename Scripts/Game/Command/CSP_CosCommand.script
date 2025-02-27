@@ -1,0 +1,756 @@
+const char CMD_VSAV1[]		= "Renfort_VSAV";
+const char CMD_VSAV2[]		= "Renfort_VSAV2";
+const char CMD_VSAV3[]		= "Renfort_VSAV3";
+const char CMD_VSAV4[]		= "Renfort_VSAV4";
+const char CMD_VSAVHR[]		= "Renfort_VSAVHR";
+const char CMD_VSAVAR[]		= "Renfort_VSAVAR";
+const char CMD_VLI1[]			= "Renfort_VLI1";
+const char CMD_VLI2[]			= "Renfort_VLI2";
+const char CMD_VSS[]			= "Renfort_VSS";
+const char CMD_FPTL[]			= "Renfort_FPTL";
+const char CMD_FPT1[]		= "Renfort_FPT1";
+const char CMD_FPT2[]		= "Renfort_FPT2";
+const char CMD_FPT3[]		= "Renfort_FPT3";
+const char CMD_CCRM[]		= "Renfort_CCRM";
+const char CMD_CCFM[]		= "Renfort_CCFM";
+const char CMD_CCFS[]		= "Renfort_CCFS";
+const char CMD_CCGC[]		= "Renfort_CCGC";
+const char CMD_FSR[]			= "Renfort_FSR";
+const char CMD_EPA[]			= "Renfort_EPA";
+const char CMD_EMOD4[]		= "Renfort_EMOD4";
+const char CMD_EMOD3[]		= "Renfort_EMOD3";
+const char CMD_VLTT[]		= "Renfort_VLTT";
+const char CMD_VLC[]			= "Renfort_VLC";
+const char CMD_FC[]			= "Renfort_FC";
+const char CMD_VPL[]			= "Renfort_VPL";
+const char CMD_PMA[]			= "Renfort_PMA";
+const char CMD_VRCH[]		= "Renfort_VRCH";
+const char CMD_VRRAD[]		= "Renfort_VRRAD";
+const char CMD_CDHR[]		= "Renfort_CDHR";
+const char CMD_VRID[]			= "Renfort_VRID";
+const char CMD_VTP[]			= "Renfort_VTP";
+const char CMD_VTU[]			= "Renfort_VTU";
+const char CMD_BAT[]			= "Renfort_Bateau";
+const char CMD_FMOGP[]			= "Renfort_FMOGP";
+const char CMD_CESD[]			= "Renfort_CESD";
+
+const char CMD_TOIT[]		= "Toit";
+
+const char CMD_FL[]			= "FeuLeger";
+const char CMD_NOR[]			= "DepartNormal";
+const char CMD_FLO[]			= "DepartFeuLourd";
+const char CMD_SRM[]			= "SecoursRoutierMoyen";
+const char CMD_SRL[]			= "SecoursRoutierLourd";
+const char CMD_SRA[]			= "SecoursRoutierAquatique";
+const char CMD_UM[]			= "UrgenceMedicale";
+const char CMD_SM[]			= "SecoursMedical";
+const char CMD_FI[]			= "FeuIndustrie";
+const char CMD_TS[]			= "TentativeSuicide";
+const char CMD_PFE[]			= "PlanFeuxExplosion";
+const char CMD_FLE[]			= "FeuVehiculeLeger";
+const char CMD_GIFF[]			= "Giff";
+
+//Cos Pompier
+const char OBJ_COS[]			= "mod:Prototypes/Persons/Fire Department/SP_COS.e4p";
+
+int DummyGroup = 20;
+
+object COSDepart : CommandScript
+{
+ 	COSDepart()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("depart_type");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand(CMD_SM);
+		Caller->EnableCommand(CMD_SM, true);
+		Caller->AssignCommand(CMD_UM);
+		Caller->EnableCommand(CMD_UM, true);
+		Caller->AssignCommand(CMD_FL);
+		Caller->EnableCommand(CMD_FL, true);
+		Caller->AssignCommand(CMD_FLE);
+		Caller->EnableCommand(CMD_FLE, true);
+		Caller->AssignCommand(CMD_NOR);
+		Caller->EnableCommand(CMD_NOR, true);
+		Caller->AssignCommand(CMD_FLO);
+		Caller->EnableCommand(CMD_FLO, true);
+		Caller->AssignCommand(CMD_FI);
+		Caller->EnableCommand(CMD_FI, true);
+		Caller->AssignCommand(CMD_PFE);
+		Caller->EnableCommand(CMD_PFE, true);
+		Caller->AssignCommand(CMD_SRM);
+		Caller->EnableCommand(CMD_SRM, true);
+		Caller->AssignCommand(CMD_SRL);
+		Caller->EnableCommand(CMD_SRL, true);
+		Caller->AssignCommand(CMD_SRA);
+		Caller->EnableCommand(CMD_SRA, true);
+		Caller->AssignCommand(CMD_TS);
+		Caller->EnableCommand(CMD_TS, true);
+		Caller->AssignCommand(CMD_GIFF);
+		Caller->EnableCommand(CMD_GIFF, true);
+		Caller->AssignCommand("COSMenu");
+		Caller->EnableCommand("COSMenu", true);
+	}
+};
+
+object COSSAP : CommandScript
+{
+ 	COSSAP()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cossap");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand(CMD_VSAV1);
+		Caller->EnableCommand(CMD_VSAV1, true);
+		Caller->AssignCommand(CMD_VSAV2);
+		Caller->EnableCommand(CMD_VSAV2, true);
+		Caller->AssignCommand(CMD_VSAV3);
+		Caller->EnableCommand(CMD_VSAV3, true);
+		Caller->AssignCommand(CMD_VSAV4);
+		Caller->EnableCommand(CMD_VSAV4, true);
+		Caller->AssignCommand(CMD_VSAVAR);
+		Caller->EnableCommand(CMD_VSAVAR, true);
+		Caller->AssignCommand(CMD_VSAVHR);
+		Caller->EnableCommand(CMD_VSAVHR, true);
+		Caller->AssignCommand(CMD_VLI1);
+		Caller->EnableCommand(CMD_VLI1, true);
+		Caller->AssignCommand(CMD_VLI2);
+		Caller->EnableCommand(CMD_VLI2, true);
+		Caller->AssignCommand(CMD_VSS);
+		Caller->EnableCommand(CMD_VSS, true);
+		Caller->AssignCommand(CMD_FSR);
+		Caller->EnableCommand(CMD_FSR, true);
+		Caller->AssignCommand(CMD_PMA);
+		Caller->EnableCommand(CMD_PMA, true);
+		Caller->AssignCommand("COSMenu");
+		Caller->EnableCommand("COSMenu", true);
+	}
+};
+
+object COSINC : CommandScript
+{
+ 	COSINC()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosinc");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand(CMD_FPT1);
+		Caller->EnableCommand(CMD_FPT1, true);
+		Caller->AssignCommand(CMD_FPT2);
+		Caller->EnableCommand(CMD_FPT2, true);
+		Caller->AssignCommand(CMD_FPT3);
+		Caller->EnableCommand(CMD_FPT3, true);
+		Caller->AssignCommand(CMD_FPTL);
+		Caller->EnableCommand(CMD_FPTL, true);
+		Caller->AssignCommand(CMD_EPA);
+		Caller->EnableCommand(CMD_EPA, true);
+		Caller->AssignCommand(CMD_CCRM);
+		Caller->EnableCommand(CMD_CCRM, true);
+		Caller->AssignCommand(CMD_CCGC);
+		Caller->EnableCommand(CMD_CCGC, true);
+		Caller->AssignCommand(CMD_CDHR);
+		Caller->EnableCommand(CMD_CDHR, true);
+		Caller->AssignCommand(CMD_FC);
+		Caller->EnableCommand(CMD_FC, true);
+		Caller->AssignCommand(CMD_FMOGP);
+		Caller->EnableCommand(CMD_FMOGP, true);
+		Caller->AssignCommand("COSMenu");
+		Caller->EnableCommand("COSMenu", true);
+	}
+};
+
+object COSDIV : CommandScript
+{
+ 	COSDIV()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosdiv");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand(CMD_VRID);
+		Caller->EnableCommand(CMD_VRID, true);
+		Caller->AssignCommand(CMD_VTP);
+		Caller->EnableCommand(CMD_VTP, true);
+		Caller->AssignCommand(CMD_VTU);
+		Caller->EnableCommand(CMD_VTU, true);
+		Caller->AssignCommand(CMD_CESD);
+		Caller->EnableCommand(CMD_CESD, true);
+		Caller->AssignCommand("COSMenu");
+		Caller->EnableCommand("COSMenu", true);
+	}
+};
+
+object COSFDF : CommandScript
+{
+ 	COSFDF()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosfdf");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand(CMD_CCFM);
+		Caller->EnableCommand(CMD_CCFM, true);
+		Caller->AssignCommand(CMD_CCFS);
+		Caller->EnableCommand(CMD_CCFS, true);
+		Caller->AssignCommand("COSMenu");
+		Caller->EnableCommand("COSMenu", true);
+	}
+};
+
+object COSSPE : CommandScript
+{
+ 	COSSPE()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosspe");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand(CMD_VRCH);
+		Caller->EnableCommand(CMD_VRCH, true);
+		Caller->AssignCommand(CMD_VRRAD);
+		Caller->EnableCommand(CMD_VRRAD, true);
+		Caller->AssignCommand(CMD_VPL);
+		Caller->EnableCommand(CMD_VPL, true);
+		Caller->AssignCommand(CMD_BAT);
+		Caller->EnableCommand(CMD_BAT, true);
+		Caller->AssignCommand("COSMenu");
+		Caller->EnableCommand("COSMenu", true);
+	}
+};
+
+object COSGOC : CommandScript
+{
+ 	COSGOC()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosgoc");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand(CMD_EMOD3);
+		Caller->EnableCommand(CMD_EMOD3, true);
+		Caller->AssignCommand(CMD_EMOD4);
+		Caller->EnableCommand(CMD_EMOD4, true);
+		Caller->AssignCommand(CMD_VLTT);
+		Caller->EnableCommand(CMD_VLTT, true);
+		Caller->AssignCommand(CMD_VLC);
+		Caller->EnableCommand(CMD_VLC, true);
+		Caller->AssignCommand("COSMenu");
+		Caller->EnableCommand("COSMenu", true);
+	}
+};
+
+object COSMenu : CommandScript
+{
+ 	COSMenu()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosmenu");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->EnableCommand("COSDepart", true);
+		Caller->EnableCommand("COSSAP", true);
+		Caller->EnableCommand("COSINC", true);
+		Caller->EnableCommand("COSDIV", true);
+		Caller->EnableCommand("COSFDF", true);
+		Caller->EnableCommand("COSSPE", true);
+		Caller->EnableCommand("COSGOC", true);
+
+		if (StrCompare(Caller->GetPrototypeFileName(), OBJ_COS) == 0)
+		{
+			Caller->EnableCommand("MoveTo", true);
+			Caller->EnableCommand("EnterCar", true);
+			Caller->EnableCommand("Init_CSP", true);
+			Caller->EnableCommand("Init_CPI", true);
+			Caller->EnableCommand(CMD_TOIT, true);
+		}
+	}
+};
+
+/////////////////////////////////////////////
+//Menu GN
+/////////////////////////////////////////////
+
+
+
+Object COSMenuGEN : CommandScript
+{
+	COSMenuGEN()
+	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosmenu");
+	}
+	
+	bool CheckPossible(GameObject *Caller)
+	{
+		return true;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		return true;
+	}
+	
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->EnableCommand("COSBmo", true);
+		Caller->EnableCommand("COSBt", true);
+		Caller->EnableCommand("COSSr", true);
+		Caller->EnableCommand("COSEgm", true);
+		Caller->EnableCommand("COSPm", true);
+		
+		Caller->EnableCommand("MoveTo", true);
+		Caller->EnableCommand("EnterCar", true);
+		
+		Caller->AssignCommand("Renfort_Ecureuil");
+		Caller->EnableCommand("Renfort_Ecureuil", true);
+		
+	}
+};
+
+object COSBt : CommandScript
+{
+	COSBt()
+	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosbt");
+	}
+	
+	bool CheckPossible(GameObject *Caller)
+	{
+		return true;
+	}
+	
+	bool CheckTarget (GameObject *Caller, Actor *Target, int childID)
+	{
+		return true;
+	}
+	
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand("Renfort_EstateGN");
+		Caller->EnableCommand("Renfort_EstateGN", true);
+		Caller->AssignCommand("Renfort_C4GN");
+		Caller->EnableCommand("Renfort_C4GN", true);
+		Caller->AssignCommand("Renfort_RangerGN");
+		Caller->EnableCommand("Renfort_RangerGN", true);
+		Caller->AssignCommand("Renfort_KangooGN");
+		Caller->EnableCommand("Renfort_KangooGN", true);
+		Caller->AssignCommand("Renfort_DusterGN");
+		Caller->EnableCommand("Renfort_DusterGN", true);
+		Caller->AssignCommand("Renfort_TraficGN");
+		Caller->EnableCommand("Renfort_TraficGN", true);
+		Caller->AssignCommand("Renfort_ExpertGN");
+		Caller->EnableCommand("Renfort_ExpertGN", true);
+		Caller->AssignCommand("COSMenuGEN");
+		Caller->EnableCommand("COSMenuGEN", true);
+	}
+};
+
+object COSBmo : CommandScript
+{
+	COSBmo()
+	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosbmo");
+	}
+	
+	bool CheckPossible(GameObject *Caller)
+	{
+		return true;
+	}
+	
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		return true;
+	}
+	
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand("Renfort_MotoGN");
+		Caller->EnableCommand("Renfort_MotoGN", true);
+		Caller->AssignCommand("Renfort_MeganeRSGN");
+		Caller->EnableCommand("Renfort_MeganeRSGN", true);
+		Caller->AssignCommand("COSMenuGEN");
+		Caller->EnableCommand("COSMenuGEN", true);
+	}
+};
+
+object COSSr : CommandScript
+{
+	COSSr()
+	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cossr");
+	}
+	
+	bool CheckPossible(GameObject *Caller)
+	{
+		return true;
+	}
+	
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		return true;
+	}
+	
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand("Renfort_C4BANANAGN");
+		Caller->EnableCommand("Renfort_C4BANANAGN", true);
+		Caller->AssignCommand("Renfort_KangooCyno");
+		Caller->EnableCommand("Renfort_KangooCyno", true);
+		Caller->AssignCommand("COSMenuGEN");
+		Caller->EnableCommand("COSMenuGEN", true);
+	}
+};
+
+object COSEgm : CommandScript
+{
+	COSEgm()
+	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosegm");
+	}
+	
+	bool CheckPossible(GameObject *Caller)
+	{
+		return true;
+	}
+	
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		return true;
+	}
+	
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand("Renfort_IVECOGN");
+		Caller->EnableCommand("Renfort_IVECOGN", true);
+		Caller->AssignCommand("Renfort_GIGN");
+		Caller->EnableCommand("Renfort_GIGN", true);
+		Caller->AssignCommand("COSMenuGEN");
+		Caller->EnableCommand("COSMenuGEN", true);
+	}
+};
+
+object COSPm : CommandScript
+{
+	COSPm()
+	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cospm");
+	}
+	
+	bool CheckPossible(GameObject *Caller)
+	{
+		return true;
+	}
+	
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		return true;
+	}
+	
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand("Renfort_DusterPM");
+		Caller->EnableCommand("Renfort_DusterPM", true);
+		Caller->AssignCommand("Renfort_ZoePM");
+		Caller->EnableCommand("Renfort_ZoePM", true);
+		Caller->AssignCommand("COSMenuGEN");
+		Caller->EnableCommand("COSMenuGEN", true);
+	}
+};
+//////////////////////////////////////////////
+//Menu PN
+//////////////////////////////////////////////
+object COSMenuPol : CommandScript
+{
+ 	COSMenuPol()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosmenu");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->EnableCommand("COSBac", true);
+		Caller->EnableCommand("COSCRS", true);
+		Caller->EnableCommand("COSPS", true);
+		Caller->EnableCommand("COSBAL", true);
+		
+		Caller->EnableCommand("MoveTo", true);
+		Caller->EnableCommand("EnterCar", true);
+		
+		Caller->EnableCommand("Renfort_Deminage", true);
+		Caller->EnableCommand("Renfort_C8RAID", true);
+		Caller->EnableCommand("Renfort_BRI", true);
+		Caller->EnableCommand("Renfort_MotoPN", true);
+
+	}
+};
+
+object COSBac : CommandScript
+{
+ 	COSBac()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosbac");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand("Renfort_BACGolf");
+		Caller->EnableCommand("Renfort_BACGolf", true);
+		Caller->AssignCommand("Renfort_BAC307");
+		Caller->EnableCommand("Renfort_BAC307", true);
+		Caller->AssignCommand("Renfort_BAC308");
+		Caller->EnableCommand("Renfort_BAC308", true);
+		Caller->AssignCommand("COSMenuPol");
+		Caller->EnableCommand("COSMenuPol", true);
+	}
+};
+
+object COSCRS : CommandScript
+{
+ 	COSCRS()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("coscrs");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand("Renfort_BUS");
+		Caller->EnableCommand("Renfort_BUS", true);
+		Caller->AssignCommand("Renfort_Canon");
+		Caller->EnableCommand("Renfort_Canon", true);
+		Caller->AssignCommand("Renfort_MasterCRS");
+		Caller->EnableCommand("Renfort_MasterCRS", true);
+		Caller->AssignCommand("Renfort_TransitCRS");
+		Caller->EnableCommand("Renfort_TransitCRS", true);
+		Caller->AssignCommand("COSMenuPol");
+		Caller->EnableCommand("COSMenuPol", true);
+	}
+};
+
+object COSPS : CommandScript
+{
+ 	COSPS()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosps");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand("Renfort_308");
+		Caller->EnableCommand("Renfort_308", true);
+		Caller->AssignCommand("Renfort_MeganePN");
+		Caller->EnableCommand("Renfort_MeganePN", true);
+		Caller->AssignCommand("Renfort_BerlingoPN");
+		Caller->EnableCommand("Renfort_BerlingoPN", true);
+		Caller->AssignCommand("Renfort_Estate");
+		Caller->EnableCommand("Renfort_Estate", true);
+		Caller->AssignCommand("Renfort_ScenicPN");
+		Caller->EnableCommand("Renfort_ScenicPN", true);
+		Caller->AssignCommand("Renfort_TraficPN");
+		Caller->EnableCommand("Renfort_TraficPN", true);
+		Caller->AssignCommand("Renfort_MasterPN");
+		Caller->EnableCommand("Renfort_MasterPN", true);
+		Caller->AssignCommand("Renfort_TransitPN");
+		Caller->EnableCommand("Renfort_TransitPN", true);
+		Caller->AssignCommand("COSMenuPol");
+		Caller->EnableCommand("COSMenuPol", true);
+	}
+};
+
+object COSBAL : CommandScript
+{
+ 	COSBAL()
+ 	{
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetIcon("cosbal");
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+		return true;
+ 	}
+ 
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+ 	{
+		return true;
+ 	}
+ 
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Caller->DisableAllCommands();
+		Caller->AssignCommand("Renfort_MasterBalisage");
+		Caller->EnableCommand("Renfort_MasterBalisage", true);
+		Caller->AssignCommand("Renfort_TraficCRS");
+		Caller->EnableCommand("Renfort_TraficCRS", true);
+		Caller->AssignCommand("Renfort_TraficVEZI");
+		Caller->EnableCommand("Renfort_TraficVEZI", true);
+		Caller->AssignCommand("COSMenuPol");
+		Caller->EnableCommand("COSMenuPol", true);
+	}
+};
+

@@ -1,0 +1,177 @@
+//******************************************************************************************
+// Alle Scripts wurden mit Scriptteilen von Saugschlauch,Boogie-Man,GoKa,a-rescue,GrisuStefan,Hoppah erstellt
+// Verändert by Saugschlauch
+// Scriptteile by GoKa,a-rescue,Saugschlauch
+// Nutzung laut Em Forum erlaubt
+//
+// Modifié par Superjajaman75 pour MOD CSP-IRG
+//
+//******************************************************************************************
+
+const char PROTO_DEVIDOIR[] 			= "mod:Prototypes/Vehicles/06 Objects/devidoir.e4p";
+const char PERSON_CHILD_DEVIDOIR[]		= "devidoir";
+const char VEHICLE_CHILD_DEVIDOIR1[]	= "devidoir1";
+const char VEHICLE_CHILD_DEVIDOIR2[]	= "devidoir2";
+
+object Devidoir : CommandScript
+{
+	Devidoir()
+	{
+		SetCursor("devidoir");
+		SetIcon("devidoir");
+		SetValidTargets(ACTOR_VEHICLE);
+	}
+	
+	bool CheckPossible(GameObject *Caller)
+	{
+		if (!Caller->IsValid())
+			return false;
+
+		if (Caller->GetObjectType() != TYPE_PERSON && Caller->GetEquipment() != EQUIP_NONE)
+			return false;
+		
+		Person p(Caller);
+		if(p.IsValid() && (p.IsCarryingPerson()||p.IsLinkedWithPerson()|| p.GetFirehoseID()!=0 || p.IsPulling() || p.GetEnteredCarID() != -1))
+			return false;
+
+		return true;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		if (!Caller->IsValid() || !Target->IsValid() || (Caller->GetID() == Target->GetID()))
+			return false;
+
+		if (Caller->GetObjectType() != TYPE_PERSON && Target->GetObjectType() != TYPE_VEHICLE)
+			return false;
+
+		Vehicle v(Target);
+		Person p(Caller);
+		if (p.GetEquipment() != EQUIP_NONE)
+			return false;
+		if (v.GetVehicleType() != VT_FIREFIGHTERS_GTF)
+			return false;
+		
+		if(StrCompare(v.GetPrototypeFileName(), PROTO_DEVIDOIR) == 0) {
+			if (v.IsDestroyed())
+				return false;
+			return true;
+		}
+		
+		if (!v.HasChild(VEHICLE_CHILD_DEVIDOIR1) && !v.HasChild(VEHICLE_CHILD_DEVIDOIR2) && !p.IsChildEnabled(PERSON_CHILD_DEVIDOIR))
+			return false;
+		
+		if (v.HasChild(VEHICLE_CHILD_DEVIDOIR1) || !v.IsChildEnabled(VEHICLE_CHILD_DEVIDOIR1))
+		{
+			if (p.IsCarryingPerson() || p.IsLinkedWithPerson() || p.GetFirehoseID() != 0 || p.IsPulling() || p.GetEnteredCarID() != -1)
+				return false;
+
+			return true;
+		} else if(p.IsChildEnabled(PERSON_CHILD_DEVIDOIR) && (v.IsChildEnabled(VEHICLE_CHILD_DEVIDOIR1) && v.IsChildEnabled(VEHICLE_CHILD_DEVIDOIR2))) 
+		{
+			return false;
+		}
+		return false;
+	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Person p(Caller);
+		Vehicle v(Target);
+		if (childID == 0)
+		{
+			Vector ChildPos = v.GetChildPosition(VEHICLE_CHILD_DEVIDOIR1);
+			Vector TargetPos = v.GetTargetPoint(Caller, TARGET_EQUIPMENTDOOR);
+			if (!p.IsChildEnabled(PERSON_CHILD_DEVIDOIR)) {
+				p.PushActionMove(ACTION_NEWLIST, ChildPos);
+				p.PushActionExecuteCommand(ACTION_APPEND, "Devidoir", Target, 1, false);
+			} else {
+				p.PushActionMove(ACTION_NEWLIST, ChildPos);
+				p.PushActionExecuteCommand(ACTION_APPEND, "Devidoir", Target, 3, false);
+			}
+			if(StrCompare(v.GetPrototypeFileName(), PROTO_DEVIDOIR) == 0) {
+				p.PushActionMove(ACTION_NEWLIST, TargetPos);
+				p.PushActionTurnTo(ACTION_APPEND, Target);
+				p.AssignCommand("InstallDevidoir");
+				p.PushActionExecuteCommand(ACTION_APPEND, "Devidoir", Target, 2, false);
+			}
+		}
+		if (childID == 1)
+		{
+			if(v.IsChildEnabled(VEHICLE_CHILD_DEVIDOIR1))
+				v.SetChildEnabled(VEHICLE_CHILD_DEVIDOIR1, false);
+			else if(v.IsChildEnabled(VEHICLE_CHILD_DEVIDOIR2))
+				v.SetChildEnabled(VEHICLE_CHILD_DEVIDOIR2, false);
+			else
+				return;
+			p.SetChildEnabled(PERSON_CHILD_DEVIDOIR, true);
+			p.AssignCommand("InstallDevidoir");
+		}
+		
+		if (childID == 2)
+		{
+			v.PushActionDeleteOwner(ACTION_APPEND);
+			p.SetChildEnabled(PERSON_CHILD_DEVIDOIR, true);
+		}
+		
+		if (childID == 3)
+		{
+			if(!v.IsChildEnabled(VEHICLE_CHILD_DEVIDOIR1))
+				v.SetChildEnabled(VEHICLE_CHILD_DEVIDOIR1, true);
+			else if(!v.IsChildEnabled(VEHICLE_CHILD_DEVIDOIR2))
+				v.SetChildEnabled(VEHICLE_CHILD_DEVIDOIR2, true);
+			else
+				return;
+			p.SetChildEnabled(PERSON_CHILD_DEVIDOIR, false);
+		}
+	}
+};
+
+object InstallDevidoir : CommandScript
+{	
+	InstallDevidoir()
+	{
+		SetIcon("install");
+	}
+
+	bool CheckPossible(GameObject *Caller)
+	{
+		if (!Caller->IsValid())
+			return false;
+
+		if (Caller->GetObjectType() != TYPE_PERSON)
+			return false;
+
+		Person p(Caller);
+		if (p.IsChildEnabled(PERSON_CHILD_DEVIDOIR))
+			return true;
+		return false;
+	}
+	
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		return true;
+	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Person p(Caller);
+		Vector Pos = p.GetPosition();
+
+		Vehicle Haspel = Game::CreateVehicle(PROTO_DEVIDOIR, "Devidoir");
+		float r[9];
+		p.GetRotation(r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8]);
+		float vx = -40.f, vy = 40.f, vz = 0.f;
+		Math::RotateVector(vx, vy, vz, r);
+		Haspel.SetRotation(r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8]);
+		Haspel.SetPosition(Pos + Vector(vx, vy, vz));
+		Haspel.SetSelectable(true);
+		int HaspelID = Haspel.GetID();
+		p.SetUserData(HaspelID);
+		p.SetChildEnabled(PERSON_CHILD_DEVIDOIR,false);
+		p.RemoveCommand("InstallDevidoir");
+		p.PushActionSwitchAnim(ACTION_NEWLIST, "idle");
+		p.PushActionWait(ACTION_APPEND, 2.f);
+		p.PushActionSwitchAnim(ACTION_APPEND, "idle");
+	}
+};

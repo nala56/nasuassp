@@ -1,0 +1,53 @@
+const char LOC_XML[]	= "mod:Scripts/Game/Command/api.xml";
+int DummyGroup 			= 20;
+
+object CSP_API : CommandScript
+{
+	CSP_API()
+	{
+ 		SetGroupID(DummyGroup);
+	}
+
+ 	bool CheckGroupVisibility(GameObject *Caller)
+ 	{
+ 		return false;
+ 	}
+ 
+ 	bool CheckPossible(GameObject *Caller)
+ 	{
+ 		return false;
+ 	} 
+
+	void PushActions(GameObject *Caller, Actor *Target, int ChildID)
+	{
+		GameObjectList objs=Game::GetGameObjects();
+		for(int i=0;i<objs.GetNumObjects();i++){
+			//Récupere la liste des objets en feu et log la position vectorielle X;Y
+			if(objs.GetObject(i)->IsBurning()){
+				Vector pos = objs.GetObject(i)->GetPosition();
+				System::Log("[INTER];Feu;%i;%i", pos.x, pos.y);		
+			}
+			//Récupere la liste des victimes et log la position vectorielle X;Y
+			if(objs.GetObject(i)->GetType()==ACTOR_PERSON) {
+				Person p(objs.GetObject(i));
+				if (p.IsInjured() && p.IsInsideMap()) {
+					Vector pos =  objs.GetObject(i)->GetPosition();
+					System::Log("[INTER];Victime;%i;%i", pos.x, pos.y);	
+				}
+			}
+		}
+		
+		/*GameDialog gd1;
+		gd1.Load(LOC_XML);
+		char result1[] = gd1.StaticText_GetText("orange");
+		System::Log("Test XML1 :  %s",result1);
+		
+		GameDialog gd2;
+		gd2.Load(LOC_XML);
+		char result2[] = gd2.StaticText_GetText("mangue");
+		System::Log("Test XML2 :  %s",result2);*/		
+		
+		Caller->PushActionWait(ACTION_NEWLIST, 30.0f);
+		Caller->PushActionExecuteCommand(ACTION_APPEND, "CSP_API", Caller, 0, false); 
+	}
+};

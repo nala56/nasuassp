@@ -1,0 +1,154 @@
+<portraits>
+
+<!--MOD CSP-->
+	
+		<!--01 Ambulance-->
+	<portrait prototype="mod:Prototypes/Vehicles/Ambulance/S-Max_2010_NEF.e4p" unit="VLM Lens" />
+	<portrait prototype="mod:Prototypes/Vehicles/Ambulance/vlmdouai.e4p" unit="VLM Douai" />
+	<portrait prototype="mod:Prototypes/Vehicles/Ambulance/ARValenciennes.e4p" unit="UMH 59" />
+	<portrait prototype="mod:Prototypes/Vehicles/Ambulance/ARSmur28.e4p" unit="UMH 38" />
+	<portrait prototype="mod:Prototypes/Vehicles/Ambulance/PF_FOURGON1.e4p" unit="PFG Mercedes" />
+	<portrait prototype="mod:Prototypes/Vehicles/Ambulance/PF_FOURGON2.e4p" unit="PF_FOURGON2" />
+	<portrait prototype="mod:Prototypes/Vehicles/Ambulance/va.e4p" unit="VLM VA" />
+	<portrait prototype="mod:Prototypes/Vehicles/Ambulance/Dragon62.e4p" unit="DRAGON62" />
+
+		
+		<!--06 POLICE-->
+	<portrait prototype="mod:Prototypes/Vehicles/Police/estatepn.e4p" unit="Megane Estate Police Nationale" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/megane3.e4p" unit="Megane 3 Police Nationale" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/VEZI.e4p" unit="VEZI" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/berlingo.e4p" unit="Berlingo Police Nationale" />	
+	<portrait prototype="mod:Prototypes/Vehicles/Police/peugeot308.e4p" unit="Peugeot 308 Police Nationale" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/VP_Scenic.e4p" unit="Scenic Police Nationale" />	
+	<portrait prototype="mod:Prototypes/Vehicles/Police/traficpnhd.e4p" unit="TRAFIC POLICE SECOURS" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/traficpn1.e4p" unit="TRAFIC CRS " />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/transit-pn.e4p" unit="Transit_PN" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/Master_PNfourgon.e4p" unit="Master_Classique" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/master_policebalisage.e4p" unit="Master_Balisage" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/Master_CRS.e4p" unit="Master CRS" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/TRANSIT_crs.e4p" unit="Transit CRS" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/buscrs.e4p" unit="BUS CRS" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/CANONCRS.e4p" unit="CANON CRS" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/deminage2.e4p" unit="Deminage" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/golf_bac.e4p" unit="Golf_Banalise" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/307_bac.e4p" unit="307_Banalise" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/308_bac.e4p" unit="308_Banalise" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/c4_bana.e4p" unit="C4_Banalise_GN" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/estategendarmerie.e4p" unit="Megane Estate Gendarmerie Nationale " />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/Kangoo1.e4p" unit="Kangoo_GN" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/Kangoo_cyno.e4p" unit="Kangoo_CYNO" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/c4_gn.e4p" unit="C4 Gendarmerie" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/trafic.e4p" unit="Trafic_GN" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/fp4v2.e4p" unit="Peugeot_Tepee" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/Ivecogendarmerie.e4p" unit="IVECO GN" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/Subaru.e4p" unit="Subaru" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/MeganeRS.e4p" unit="Megane RS" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/ford_focusrs.e4p" unit="Ford Focus RS" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/Audi_A6.e4p" unit="Audi_A6 GIGN" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/c8_raid.e4p" unit="c8_raid" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/bri.e4p" unit="four_bri" />
+	<portrait prototype="mod:Prototypes/Vehicles/03 LA Police/as350_lapd.e4p" unit="Ecureuil_Gn" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/TepeePolm.e4p" unit="DusterPM" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/cliopolm.e4p" unit="ZoePM" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/BMW1200RT.e4p" unit="BMW 1200RT Gendarmerie" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/BMW1200RTPN.e4p" unit="BMW 1200RT Police Nationale" />
+	<portrait prototype="mod:Prototypes/Vehicles/Police/508_fuite.e4p" unit="508_fuite" />
+
+
+
+
+	
+		<!--09 Fire Department-->
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/vsav1master.e4p" unit="VSAV1 Renault Master" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/vsavDouai.e4p" unit="VSAV2 Citroen Jumper" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/VSAV6.e4p" unit="VSAV3 Renault Master" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/VSAVsin.e4p" unit="VSAV DOUAI 03" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/vsavhr.e4p" unit="VSAV HR" />	
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/VLIDOUAI.e4p" unit="VLId" />	
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/VLI1.e4p" unit="VLIp" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/VSS_HD.e4p" unit="VSS" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/FPTL68.e4p" unit="FPTL" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/fptscanianouveau.e4p" unit="FPT 01" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/FPT6.e4p" unit="FPT 02" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/FPT3.e4p" unit="FPT 03" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/nouveauccr.e4p" unit="CCRM " />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/CCF1.e4p" unit="CCF" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/CCFS1.e4p" unit="CCFS" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/ccgc.e4p" unit="CCGC" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/FSR2.e4p" unit="FSR Man" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/EPA_Scania.e4p" unit="EPA Scania" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/EMOD4.e4p" unit="EMOD4" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/EMOD32.e4p" unit="EMOD3" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/vl9.e4p" unit="VLTT" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/VLC.e4p" unit="VLC" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/vpc-redeployer.e4p" unit="VPC" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/FCnoinstal.e4p" unit="FC" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/vpl_HD.e4p" unit="VPL" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/PMA.e4p" unit="PMA" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/VIRT2.e4p" unit="VRCH" />	
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/vraad.e4p" unit="VRRAD" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/CDHR.e4p" unit="CDHR" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/2.e4p" unit="VRID" />	
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/VTU.e4p" unit="VTU" />	
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/VTPSP.e4p" unit="VTPSP" />	
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/bateau.e4p" unit="Bateau" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/AR_SP.e4p" unit="VSAV Cube" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/CSD.e4p" unit="CeSD" />
+	<portrait prototype="mod:Prototypes/Vehicles/Fire Department/FMOGP.e4p" unit="FMOGP" />
+
+	
+		<!--10 TEC-->
+	<portrait prototype="mod:Prototypes/Vehicles/TEC/erdf.e4p" unit="GRDF" />
+	<portrait prototype="mod:Prototypes/Vehicles/TEC/depaneuse1.e4p" unit="Dépaneuse" />
+	<portrait prototype="mod:Prototypes/Vehicles/TEC/Sanef01.e4p" unit="Patrouilleur 1" />
+	<portrait prototype="mod:Prototypes/Vehicles/TEC/VP8.e4p" unit="Patrouilleur 2" />
+	<portrait prototype="mod:Prototypes/Vehicles/Sonstiges/Kran.e4p" unit="Grue" />
+	
+		<!-- persons -->	
+		
+	<portrait prototype="mod:Prototypes/Persons/Fire Department/SP_COS.e4p" big="cos" unit="SP_COS" text="cos"/>
+	<portrait prototype="mod:Prototypes/Persons/Fire Department/SP_FEU.e4p" big="feu" unit="SP_FEU" text="feu"/>
+	<portrait prototype="mod:Prototypes/Persons/Fire Department/SP_ARI.e4p" big="ari" unit="SP_ARI" text="ari"/>
+	<portrait prototype="mod:Prototypes/Persons/Fire Department/SP_GHV.e4p" big="gilet" unit="SP_GHV" text="gilet"/>
+	<portrait prototype="mod:Prototypes/Persons/Fire Department/SP_CHI.e4p" big="nrbc" unit="SP_CHI" text="nrbc"/>
+	<portrait prototype="mod:Prototypes/Persons/Fire Department/SP_PLO.e4p" big="plongeur" unit="SP_PLO" text="plongeur"/>
+	<portrait prototype="mod:Prototypes/Persons/Fire Department/SP_FDF.e4p" big="fdf" unit="SP_FDF" text="fdf"/>
+	<portrait prototype="mod:Prototypes/Persons/Fire Department/SP_MED.e4p" big="infiermiergilet" unit="SP_MED" text="medecin"/>
+	<portrait prototype="mod:Prototypes/Persons/Fire Department/SP_CDHR.e4p" big="cdhr" unit="SP_CDHR" text="cdhr"/>
+	
+	<portrait prototype="mod:Prototypes/Persons/Ambulance/SAMU_MED.e4p" big="medecins" unit="SAMU_MED" text="medecins"/>
+	<portrait prototype="mod:Prototypes/Persons/Ambulance/SAMU_BRAinjured.e4p" big="samubran" unit="SAMU_BRA" text="samubran"/>	
+	<portrait prototype="mod:Prototypes/Persons/Ambulance/SAMU_BRA.e4p" big="samubran" unit="SAMU_BRA" text="samubran"/>	
+	<portrait prototype="mod:Prototypes/Persons/Ambulance/pompe.e4p" big="pfg" unit="PF" text="pfg"/>
+	<portrait prototype="mod:Prototypes/Persons/Ambulance/pompeinjured.e4p" big="pfg" unit="PF" text="pfg"/>
+	<portrait prototype="mod:Prototypes/Persons/Ambulance/cosa.e4p" big="cosa" unit="COS_A" text="COS_A"/>
+	<portrait prototype="mod:Prototypes/Persons/Ambulance/PC_BRA.e4p" big="spbran" unit="SP_BRA" text="brancardier"/>
+	<portrait prototype="mod:Prototypes/Persons/Ambulance/PC_BRAinjured.e4p" big="spbran" unit="SP_BRA" text="brancardier"/>
+	<portrait prototype="mod:Prototypes/Persons/Ambulance/PC_MED.e4p" big="medecin" unit="SP_SEC" text="secouriste"/>
+	
+	<portrait prototype="mod:Prototypes/Persons/Police/gnormal.e4p" big="gnormal" unit="gendarmenormal" text="gnormal"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/gcyno.e4p" big="gendarmecyno" unit="gendarmecyno" text="gendarmecyno"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/enqueteur.e4p" big="enqueteur" unit="enqueteur" text="enqueteur"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/ggilet.e4p" big="ggilet" unit="gendarmegilet" text="ggilet"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/crs.e4p" big="crs" unit="crs" text="crs"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/negociateur.e4p" big="negociateur" unit="negociateur" text="negociateur"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/eclaireur.e4p" big="eclaireur" unit="eclaireur" text="eclaireur"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/sniper.e4p" big="sniper" unit="sniper" text="sniper"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/demineur.e4p" big="demineur" unit="demineur" text="demineur"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/gm.e4p" big="gm" unit="Gendarme Mobile" text="gm"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/polnormal.e4p" big="normal" unit="policiernormal" text="pnormal"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/polgilet.e4p" big="gilet" unit="policiergilet" text="pgilet"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/bac.e4p" big="bac" unit="tenue bac" text="bac"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/bri.e4p" big="bri" unit="bri" text="bri"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/cosg.e4p" big="cosg" unit="COS_G" text="COS_G"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/cosp.e4p" big="cosp" unit="COS_P" text="COS_P"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/polmuni.e4p" big="municipale" unit="policemunicipale" text="municipale"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/Motard_GN.e4p" big="motardgn" unit="motardgn" text="motardgn"/>
+	<portrait prototype="mod:Prototypes/Persons/Police/Motard_PN.e4p" big="motardpn" unit="motardpn" text="motardpn"/>
+
+	
+	<portrait prototype="mod:Prototypes/Persons/TEC/bspp_erdf.e4p" big="edf-grdf" unit="ERDF" text="edf-grdf"/>
+	<portrait prototype="mod:Prototypes/Persons/TEC/bspp_dde1.e4p" big="dde-dir" unit="DDE" text="dde-dir"/>
+	<portrait prototype="mod:Prototypes/Persons/TEC/cost.e4p" big="costec" unit="COS_T" text="COS_T"/>
+	
+</portraits>

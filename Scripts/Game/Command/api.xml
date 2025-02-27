@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<dialog version="1" id="Info">
+	<define id="defDialogText" font="mod:Fonts/arial_8_noshadow" texthalign="left" textvalign="center"/>
+	
+	<statictext id="mangue" text="Mango" call="defDialogText"/>
+	<statictext id="orange" text="Orange" call="defDialogText"/>
+</dialog> 

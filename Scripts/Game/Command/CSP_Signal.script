@@ -1,0 +1,454 @@
+const char PROTO_VEZI[] 					= "mod:Prototypes/Vehicles/Police/VEZI.e4p";
+
+const char CMD_DIRECTIONALLIGHTS_OFF[]		= "VcmdDirectionalLightsOff";
+const char CMD_DIRECTIONALLIGHTS_ON[]		= "VcmdDirectionalLightsOn";
+const char CMD_FLECHE_GAUCHE[]				= "VCmdFlecheGauche";
+const char CMD_FLECHE_DROITE[]				= "VCmdFlecheDroite";
+const char CMD_PMV_UP[]						= "VCmdLeverPMV";
+const char CMD_PMV_DOWN[]					= "VCmdBaisserPMV";
+const char CMD_InstallFSR[]					= "VCmdInstallFSR";
+const char CMD_UnInstallFSR[]				= "VCmdUnInstallFSR";
+const char CMD_InstallVPC[]					= "VCmdInstallVPC";
+const char CMD_UnInstallVPC[]				= "VCmdUnInstallVPC";
+const char DUMMY_PMV_UP[]					= "DummyPMVUp";
+const char DUMMY_FLECHE_GAUCHE[]			= "DummyFlecheGauche";
+const char DUMMY_FLECHE_DROITE[]			= "DummyFlecheDroite";
+
+int DummyGroup = 140;
+
+// Install VPC ---------
+
+object VCmdInstallVPC : CommandScript
+{
+	VCmdInstallVPC()
+	{
+		SetIcon("install");
+		SetValidTargets(ACTOR_VEHICLE);
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetGroupID(CGROUP_INSTALL);
+		SetGroupLeader(true);
+		SetPriority(50);
+	}
+
+	bool CheckPossible(GameObject *Caller)
+	{
+		if(!Caller->IsValid() || Caller->GetType() != ACTOR_VEHICLE)
+			return false;
+
+		return true;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+ 		if (!Caller->IsValid() || !Target->IsValid() || Target->GetID() != Caller->GetID() || Caller->GetType() != ACTOR_VEHICLE)
+ 			return false;
+ 		return true;
+	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+		bool LIGHT = v.IsBlueLightEnabled();
+		v.EnableBlueLights(LIGHT);	
+		v.PlayAnimOpenDoor(DAT_SPECIAL, 4.f, Caller);
+		v.PushActionWait (ACTION_APPEND, 3.0f);
+		v.RemoveCommand("MoveTo");
+		v.RemoveCommand("MoveTo");
+		v.RemoveCommand("Positionnement");		
+		v.EnableTrafficLight(TLT_GREEN);
+		v.RemoveCommand(CMD_InstallVPC);
+		v.AssignCommand(CMD_UnInstallVPC);
+		v.EnableCommand(CMD_UnInstallVPC, true);
+	}
+};
+
+object VCmdUnInstallVPC : CommandScript
+{
+	VCmdUnInstallVPC()
+	{
+		SetIcon("install");
+		SetValidTargets(ACTOR_VEHICLE);
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetGroupID(CGROUP_INSTALL);
+		SetGroupLeader(true);
+		SetPriority(50);
+	}
+
+	bool CheckPossible(GameObject *Caller)
+	{
+		if(!Caller->IsValid() || Caller->GetType() != ACTOR_VEHICLE)
+			return false;
+
+		return true;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+ 		if (!Caller->IsValid() || !Target->IsValid() || Target->GetID() != Caller->GetID() || Caller->GetType() != ACTOR_VEHICLE)
+ 			return false;
+ 		return true;
+	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+		bool LIGHT = v.IsBlueLightEnabled();
+		v.EnableBlueLights(LIGHT);
+		v.PlayAnimCloseDoor(DAT_SPECIAL, 4.f, Caller);
+		v.AssignCommand("MoveTo");
+		v.AssignCommand("GoHome");
+		v.AssignCommand("Positionnement");
+		v.EnableTrafficLight(TLT_NONE);
+		v.RemoveCommand(CMD_UnInstallVPC);
+		v.AssignCommand(CMD_InstallVPC);
+		v.EnableCommand(CMD_InstallVPC, true);
+	}
+};
+
+// Install FSR ---------
+
+object VCmdInstallFSR : CommandScript
+{
+	VCmdInstallFSR()
+	{
+		SetIcon("install");
+		SetValidTargets(ACTOR_VEHICLE);
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetGroupID(CGROUP_INSTALL);
+		SetGroupLeader(true);
+		SetPriority(50);
+	}
+
+	bool CheckPossible(GameObject *Caller)
+	{
+		if(!Caller->IsValid() || Caller->GetType() != ACTOR_VEHICLE)
+			return false;
+
+		return true;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+ 		if (!Caller->IsValid() || !Target->IsValid() || Target->GetID() != Caller->GetID() || Caller->GetType() != ACTOR_VEHICLE)
+ 			return false;
+ 		return true;
+	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+		bool LIGHT = v.IsBlueLightEnabled();
+		v.EnableBlueLights(LIGHT);	
+		v.PlayAnimOpenDoor(DAT_SPECIAL, 4.f, Caller);
+		v.PushActionWait (ACTION_APPEND, 3.0f);
+		v.RemoveCommand("MoveTo");
+		v.RemoveCommand("MoveTo");
+		v.RemoveCommand("Positionnement");
+		v.EnableCommand(CMD_FLECHE_GAUCHE, true);
+		v.AssignCommand(CMD_FLECHE_GAUCHE);
+		v.EnableCommand(CMD_FLECHE_DROITE, true);
+		v.AssignCommand(CMD_FLECHE_DROITE);
+		v.EnableTrafficLight(TLT_GREEN);
+		v.RemoveCommand(CMD_InstallFSR);
+		v.AssignCommand(CMD_UnInstallFSR);
+		v.EnableCommand(CMD_UnInstallFSR, true);
+	}
+};
+
+object VCmdUnInstallFSR : CommandScript
+{
+	VCmdUnInstallFSR()
+	{
+		SetIcon("install");
+		SetValidTargets(ACTOR_VEHICLE);
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetGroupID(CGROUP_INSTALL);
+		SetGroupLeader(true);
+		SetPriority(50);
+	}
+
+	bool CheckPossible(GameObject *Caller)
+	{
+		if(!Caller->IsValid() || Caller->GetType() != ACTOR_VEHICLE)
+			return false;
+
+		return true;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+ 		if (!Caller->IsValid() || !Target->IsValid() || Target->GetID() != Caller->GetID() || Caller->GetType() != ACTOR_VEHICLE)
+ 			return false;
+ 		return true;
+	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+		bool LIGHT = v.IsBlueLightEnabled();
+		v.EnableBlueLights(LIGHT);
+		v.PlayAnimCloseDoor(DAT_SPECIAL, 4.f, Caller);
+		v.AssignCommand("MoveTo");
+		v.AssignCommand("GoHome");
+		v.AssignCommand("Positionnement");
+		v.RemoveCommand(CMD_FLECHE_GAUCHE);
+		v.RemoveCommand(CMD_FLECHE_DROITE);
+		v.EnableTrafficLight(TLT_NONE);
+		v.RemoveCommand(CMD_FLECHE_DROITE);
+		v.RemoveCommand(CMD_FLECHE_GAUCHE);
+		v.RemoveCommand(CMD_UnInstallFSR);
+		v.AssignCommand(CMD_InstallFSR);
+		v.EnableCommand(CMD_InstallFSR, true);
+	}
+};
+
+object VCmdLeverPMV : CommandScript
+{
+	VCmdLeverPMV()
+	{
+		SetIcon("leverpmv");
+		SetValidTargets(ACTOR_VEHICLE);
+		SetPossibleCallers(ACTOR_VEHICLE);
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetGroupID(DummyGroup);
+	}
+
+	bool CheckGroupVisibility(GameObject *Caller)
+	{
+		Vehicle v(Caller);
+		if (v.HasCommand(DUMMY_PMV_UP))
+			return false;
+
+		return true;
+	}
+
+	bool CheckPossible(GameObject *Caller)
+	{
+		if(!Caller->IsValid() || Caller->GetType() != ACTOR_VEHICLE)
+			return false;
+
+		return true;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+		Vehicle vt(Target);
+		if (v.GetID() == vt.GetID())
+			return true;
+
+		return false;
+	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+		v.AssignCommand(DUMMY_PMV_UP);
+		if(StrCompare(v.GetPrototypeFileName(), PROTO_VEZI) != 0)
+		{			
+			v.AssignCommand(CMD_FLECHE_GAUCHE);
+			v.EnableCommand(CMD_FLECHE_GAUCHE, true);
+			v.AssignCommand(CMD_FLECHE_DROITE);
+			v.EnableCommand(CMD_FLECHE_DROITE, true);
+		}
+		v.AssignCommand(CMD_PMV_DOWN);
+		v.EnableCommand(CMD_PMV_DOWN, true);
+		v.PlayAnimOpenDoor(DAT_SPECIAL, 0.6f, Caller);
+		v.EnableTrafficLight(TLT_GREEN);
+	}
+};
+
+object VCmdBaisserPMV : CommandScript
+{ 
+	VCmdBaisserPMV()
+	{
+		SetIcon("baisserpmv");
+		SetValidTargets(ACTOR_VEHICLE);
+		SetPossibleCallers(ACTOR_VEHICLE);
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+		SetGroupID(DummyGroup);
+	}
+
+	bool CheckGroupVisibility(GameObject *Caller)
+	{
+		Vehicle v(Caller);
+		if (v.HasCommand(DUMMY_PMV_UP))
+			return true;
+			
+		return false;	
+	}
+
+	bool CheckPossible(GameObject *Caller)
+	{
+		Vehicle v(Caller);
+		if (v.IsValid() && v.HasCommand(DUMMY_PMV_UP))
+			return true;
+		
+		return false;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+		Vehicle vt(Target);
+		if (v.GetID() == vt.GetID())
+		{
+			if (v.HasCommand(DUMMY_PMV_UP))
+				return true;
+		}
+	
+		return false;
+	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+		v.RemoveCommand(DUMMY_PMV_UP);
+		v.PlayAnimCloseDoor(DAT_SPECIAL, 0.6f, Caller);
+		v.EnableTrafficLight(TLT_NONE);
+		if (v.HasCommand(DUMMY_FLECHE_DROITE))
+		{
+			Game::ExecuteCommand(CMD_DIRECTIONALLIGHTS_OFF, &v);
+ 			v.RemoveCommand(DUMMY_FLECHE_DROITE);
+		}
+		if (v.HasCommand(DUMMY_FLECHE_GAUCHE))
+		{
+			Game::ExecuteCommand(CMD_DIRECTIONALLIGHTS_OFF, &v);
+ 			v.RemoveCommand(DUMMY_FLECHE_GAUCHE);
+		}
+		v.RemoveCommand(CMD_FLECHE_DROITE);
+		v.RemoveCommand(CMD_FLECHE_GAUCHE);
+		v.RemoveCommand(CMD_PMV_DOWN);
+		v.AssignCommand(CMD_PMV_UP);
+		v.EnableCommand(CMD_PMV_UP, true);
+	}
+};
+
+object VCmdFlecheGauche : CommandScript
+{
+	VCmdFlecheGauche()
+	{
+		SetIcon("specialg");
+		SetPossibleCallers(ACTOR_VEHICLE);
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+	}
+
+	bool CheckPossible(GameObject *Caller)
+	{
+		if(!Caller->IsValid() || Caller->GetType() != ACTOR_VEHICLE)
+			return false;
+
+		return true;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		if (!Caller->IsValid() || !Target->IsValid() || Target->GetID() != Caller->GetID())
+			return false;
+
+		if (Caller->GetType() == ACTOR_VEHICLE)
+			return true;
+
+		return true;
+	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+
+		if (v.HasCommand(DUMMY_FLECHE_GAUCHE))
+		{
+			v.EnableTrafficLight(TLT_GREEN);
+			Game::ExecuteCommand(CMD_DIRECTIONALLIGHTS_OFF, &v);
+			v.RemoveCommand(DUMMY_FLECHE_GAUCHE);
+			return;
+		}
+
+		if (!v.HasCommand(DUMMY_FLECHE_GAUCHE))
+		{
+			v.EnableTrafficLight(TLT_YELLOW);
+			v.AssignCommand(DUMMY_FLECHE_GAUCHE);
+			Game::ExecuteCommand(CMD_DIRECTIONALLIGHTS_ON, &v);
+			return;
+		}
+	}
+};
+
+object VCmdFlecheDroite : CommandScript
+{
+	VCmdFlecheDroite()
+	{
+		SetIcon("speciald");
+		SetPossibleCallers(ACTOR_VEHICLE);
+		SetRestrictions(RESTRICT_SELFEXECUTE);
+	}
+
+	bool CheckPossible(GameObject *Caller)
+	{
+		if(!Caller->IsValid() || Caller->GetType() != ACTOR_VEHICLE)
+			return false;
+
+		return true;
+	}
+
+	bool CheckTarget(GameObject *Caller, Actor *Target, int childID)
+	{
+		if (!Caller->IsValid() || !Target->IsValid() || Target->GetID() != Caller->GetID())
+			return false;
+
+		if (Caller->GetType() == ACTOR_VEHICLE)
+			return true;
+
+		return true;
+	}
+
+	void PushActions(GameObject *Caller, Actor *Target, int childID)
+	{
+		Vehicle v(Caller);
+
+		if (v.HasCommand(DUMMY_FLECHE_DROITE))
+		{
+			v.EnableTrafficLight(TLT_GREEN);
+			//v.PushActionExecuteCommand(ACTION_NEWLIST, CMD_DIRECTIONALLIGHTS_OFF);
+			Game::ExecuteCommand(CMD_DIRECTIONALLIGHTS_OFF, &v);
+			v.RemoveCommand(DUMMY_FLECHE_DROITE);
+			return;
+		}
+
+		if (!v.HasCommand(DUMMY_FLECHE_DROITE))
+		{
+			v.EnableTrafficLight(TLT_RED);
+			v.AssignCommand(DUMMY_FLECHE_DROITE);
+			//v.PushActionExecuteCommand(ACTION_NEWLIST, CMD_DIRECTIONALLIGHTS_ON);
+			Game::ExecuteCommand(CMD_DIRECTIONALLIGHTS_ON, &v);
+			return;
+		}
+	}
+};
+
+object DummyPMVUp : CommandScript
+{
+ 	DummyPMVUp() { SetGroupID(DummyGroup); }
+
+ 	bool CheckPossible(GameObject *Caller) { return false; }
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID) { return false; }
+ 	void PushActions(GameObject *Caller, Actor *Target, int childID) { }
+};
+
+object DummyFlecheGauche : CommandScript
+{
+ 	DummyFlecheGauche() { SetGroupID(DummyGroup); }
+
+ 	bool CheckPossible(GameObject *Caller) { return false; }
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID) { return false; }
+ 	void PushActions(GameObject *Caller, Actor *Target, int childID) { }
+};
+
+object DummyFlecheDroite : CommandScript
+{
+ 	DummyFlecheDroite() { SetGroupID(DummyGroup); }
+
+ 	bool CheckPossible(GameObject *Caller) { return false; }
+ 	bool CheckTarget(GameObject *Caller, Actor *Target, int childID) { return false; }
+ 	void PushActions(GameObject *Caller, Actor *Target, int childID) { }
+};
